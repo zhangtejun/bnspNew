@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="mybatis">
+	<resultMap id="CashFlowKindMap" type="HashMap">
+		<result property="CatalogNo" column="id" />
+		<result property="CatalogName" column="menu_url" />
+	</resultMap>
+<select id="aa" parameterType="java.lang.String" resultMap="CashFlowKindMap">
+	select id,menu_url from shopping_vmenu
+</select>
+</mapper>

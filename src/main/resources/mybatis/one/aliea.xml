@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <mapper namespace="mybatis"> 
+
+ </mapper>
+ 
+ <!-- <?xml version="1.0" encoding="UTF-8" ?>  -->
+<!--  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" -->
+<!-- "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!-- <mapper namespace="mytest"> -->
+<!-- 	<update id="updatePtabJnl" parameterType="HashMap"> -->
+<!-- 		update  -->
+<!-- 			pits_ptab_jnl -->
+<!-- 		set -->
+<!-- 			 jnl_status=#JnlStatus# -->
+<!-- 			,jnl_endtime=#JnlEndTime# -->
+<!-- 			,jnl_rejcode=#JnlRejCode# -->
+<!-- 			,jnl_hostjnlno=#JnlHostJnlNo# -->
+<!-- 			,jnl_branchid=#JnlBranchId# -->
+			
+<!-- 		WHERE -->
+<!-- 		  	jnl_seqno=#JnlSeqNo# -->
+<!-- 	</update> -->
+<!-- </mapper> -->

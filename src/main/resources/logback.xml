@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE configuration>
+
+<configuration debug="false">
+
+	<property name="APP_NAME" value="pits_${weblogic.Name}" />
+	<property name="LOG_HOME" value="/ebank/log/pits" />
+
+	<contextName>${APP_NAME}</contextName>
+
+	
+	<!-- 控制台输出 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%-5p %d{HH:mm:ss:SSS} [%thread] %c{0} %m%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 按照每天生成日志文件 -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_HOME}/${APP_NAME}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%-5p %d{HH:mm:ss:SSS} [%thread] %c{0} %m%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<root>
+		<level value="DEBUG" />
+		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration>

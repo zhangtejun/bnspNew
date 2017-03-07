@@ -1,0 +1,103 @@
+@charset "utf-8";
+html, body, form, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, em, address, a, input, textarea, span, strong, img{margin: 0px;padding: 0px}
+body{font-size: 12px;color: #333;font-family:"微软雅黑";}
+ul,li,ol{list-style: none}
+input, textarea, select, button{font-size: 12px}
+img{border: none}
+a{color: #333;text-decoration: none;outline: none;-webkit-transition: color 0.5s ease;-moz-transition: color 0.5s ease;-o-transition: color 0.8s ease;transition: color 0.5s ease;}
+table{border-collapse: collapse}
+table, thead, tbody, tfoot, tr, td{margin: 0px}
+.clear{clear: both;height: 0px;line-height: 0px;font-size: 0px;overflow: hidden;visibility: hidden}
+h1, h2, h3, h4, h5, h6{font-size: 12px;font-weight: normal}
+i,em{font-style: normal;}
+::selection{background: #6f346a;color: #fff}
+::-moz-selection{background:#6f346a;
+color:#fff}
+::-webkit-selection{background:#6f346a;
+color:#fff}
+section, article, aside, header, footer, nav, dialog, figure{display: block;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{*+height:1%;}
+.dib{display: inline-block;*display:inline;zoom:1;}
+.pr{position: relative;z-index: 0;}
+.pa{position: absolute;}
+.tin{text-indent:2em;}
+.tac{text-align: center !important;}
+.fl{float:left;}
+.fr{float:right;}
+.center{width: 1000px; margin: 0 auto;}
+.show{display:block;}
+.icon{background: url(../images/icon.png) no-repeat;}
+.vm{vertical-align: middle;}
+.wimg{overflow: hidden;}
+.wimg img{width: 100%;}
+.pb40{padding-bottom: 40px;}
+.z9{z-index: 9;}
+.w250{width: 250px;}
+/*///////*/
+.bord_bot_red{ border-bottom: 2px solid #dc0500;}
+.mr_105{margin-right: 105px;}
+.pat_10{padding: 10px;}
+.mt_10{margin-top: 10px;}
+.mt_15{margin-top: 15px;}
+.mt_20{margin-top: 20px;}
+.mt_0{margin-top: 0px !important;}
+.mt_60{margin-top: 60px;}
+.mt_30{margin-top: 30px;}
+.mt_40{margin-top: 40px;}
+.mt_20{margin-top: 20px;}
+.mb_20{margin-bottom: 20px;}
+.mb_15{margin-bottom: 15px;}
+.mb_50{margin-bottom: 50px;}
+.mrl_36{margin-left: 36px;}
+.ml_55{margin-left: 55px;}
+.ml_20{margin-left: 20px;}
+.mt_100{margin-top: 100px;}
+.f_wet{font-weight: bold;}
+.f_c_8f{color: #8f8f8f;}
+.f_c_red{color:#dc0500}
+.f_c_000{color: #000;}
+.f_c_fff{color: #fff;}
+.f_c_666{color: #666;}
+.f_c_999{color: #999;}
+.f_c_333{color: #333;}
+.f_c_ccc{color: #ccc;}
+.f_c_24{color: #242424;}
+.f_c_3b7004{color: #3b7004;}
+.f_c_green{color: #007939 !important;}
+.f_c_blue{color: #00beee;}
+.f_s_76{font-size: 76px;}
+.f_s_80{font-size: 80px;}
+.f_s_43{font-size: 43px;}
+.f_s_24{font-size: 24px;}
+.f_s_28{font-size: 28px;}
+.f_s_20{font-size: 20px;}
+.f_s_30{font-size: 30px; }
+.f_s_36{font-size: 36px; }
+.f_s_40{font-size: 40px; }
+.f_s_26{font-size: 26px;}
+.f_s_18{font-size: 18px;}
+.f_s_16{font-size: 16px;}
+.f_s_14{font-size: 14px;}
+.f_s_12{font-size: 12px;}
+.bord_b_green{border-bottom: 1px dashed #3b7004;}
+/**********  content  *********/
+#content{width:100%; background:#fefefe;}
+#content1{ margin: 0 auto; background:#f4f4f4;}
+
+.pic_cc{width: 100%;height: 100%;top: 0;left: 0;background: #000;opacity: .5;filter: alpha(opacity=50);}
+.pic_fdj{width: 100px;height: 100px;background-position: -45px -156px;left: 107px;top: -100px;}
+
+
+
+
+
+::-webkit-scrollbar-track-piece{width:13px;border-right:1px solid #EEE;border-left:1px solid #e4e4e4;background-color:#f0f0f0;background-image:-webkit-linear-gradient(left,#f0f0f0,#FFF)}
+::-webkit-scrollbar{width:13px;height:13px}
+::-webkit-scrollbar-thumb{position:relative;min-height:25px;border-radius:9999px;background-color:#c2c2c2;background-clip:padding-box}
+::-webkit-scrollbar-thumb:vertical{border-top:0 solid transparent;border-right:2px solid transparent;border-bottom:0 solid transparent;border-left:3px solid transparent}
+::-webkit-scrollbar-thumb:horizontal{border-top:3px solid transparent;border-right:0 solid transparent;border-bottom:2px solid transparent;border-left:0 solid transparent}
+::-webkit-scrollbar-thumb:hover{background-color:#999;}
+::-webkit-scrollbar-thumb:active{background-color:#7d7d7d}
+::selection{background:#4792FF;color:#fff}
+::-moz-selection{background:#4792FF;color:#fff}

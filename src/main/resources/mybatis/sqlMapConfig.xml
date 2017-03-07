@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <!--iBatis 和 MyBatis 的全局配置文件使用不同的 DTD 约束，在将应用由
+ iBatis 升级至 MyBatis 时需要注意（两者的映射文件 DTD 约束也不相同）--> 
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+<typeAliases>
+<typeAlias alias="HashMap" type="java.util.HashMap" />
+<typeAlias alias="List" type="java.util.List" />
+<typeAlias alias="String" type="java.lang.String" />
+<typeAlias alias="Decimal" type="java.math.BigDecimal" />
+<typeAlias alias="Timestamp" type="java.sql.Timestamp" />
+</typeAliases>
+    <environments default="development"> 
+        <environment id="development"> 
+            <transactionManager type="JDBC" /> 
+            <dataSource type="POOLED"> 
+                <property name="driver" value="${jdbc.driver}" /> 
+                <property name="url" value="${jdbc.url}" /> 
+                <property name="username" value="${jdbc.username}" /> 
+                <property name="password" value="${jdbc.password}" /> 
+            </dataSource> 
+        </environment> 
+    </environments>
+    <!-- 非注解的sql映射文件配置，如果使用mybatis注解，该mapper无需配置，但是如果mybatis注解中包含@resultMap注解，
+                        则mapper必须配置，给resultMap注解使用 -->
+	<mappers>
+		<mapper resource="mybatis/one/sql_test.xml"/>
+	</mappers>
+</configuration>
