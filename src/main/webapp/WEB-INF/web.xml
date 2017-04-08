@@ -44,6 +44,16 @@
         <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
         <url-pattern>*.do</url-pattern>   <!-- 定义哪些请求交给spring mvc处理 -->
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+        <url-pattern>*.config</url-pattern>   <!-- 定义哪些请求交给spring mvc处理 -->
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+        <url-pattern>*.swf</url-pattern>   <!-- 定义哪些请求交给spring mvc处理 -->
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>/index.html</welcome-file>
     </welcome-file-list>

@@ -21,7 +21,7 @@ import com.cn.uuu.service.BaseService;
  */
 @Controller
 public class CopyOfTestController {
-	@Autowired
+//	@Autowired
 	public UserDao userDao;
 	@RequestMapping(value="/hello1.do",method=RequestMethod.GET)
 	public void testBaseService(HttpServletRequest request,String name) {

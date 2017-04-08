@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 
 /**
- * 基础服务类
+ * 基础服务类  针对方式一，方式二需要注释掉@Resource(name="oneSqlMapExecutorTemplate")
  * @author 10539
  *
  */

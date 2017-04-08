@@ -10,29 +10,31 @@
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.cn" />
-	
-    <!-- 开启注解 -->
-    <mvc:annotation-driven /> 
-	
-	<!--引入属性文件  -->
- 	<context:property-placeholder location="classpath:jdbc.properties" />
- 
-	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<context:component-scan base-package="com.cn.uuu" />
+
+	<!-- 开启注解 -->
+	<mvc:annotation-driven />
+
+	<!--引入属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties,file:/zhangtejun/dev/config.properties" />
+
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-    <!-- 配置国际化资源文件路径 -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basenames">
-<!--             定义消息资源文件的相对路径 -->
-            <value>message</value>
-        </property>
-    </bean>	
+	<!-- 配置国际化资源文件路径 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<!-- 定义消息资源文件的相对路径 -->
+			<value>message</value>
+		</property>
+	</bean>
 
-<!-- dataSource  -->
+	<!-- dataSource -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -51,40 +53,54 @@
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="${jdbc.maxWait}"></property>
 	</bean>
-	
-	
-<!-- **************************方式一Start*********************************** -->
-	<!-- 创建SqlSessionFactory，同时指定数据源-->
+
+
+	<!-- **************************方式一Start*********************************** -->
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效-->  
-		<property  name="configLocation"  value="classpath:mybatis/sqlMapConfig.xml"/>  
-  		<!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可，
-  			当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 -->  
-		<!-- <property  name="mapperLocations"  value="classpath*:com/xxt/ibatis/dbcp/**/*.xml"/>  -->
+		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效 -->
+		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+		<!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可， 
+			当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 -->
+		<!-- <property name="mapperLocations" value="classpath*:com/xxt/ibatis/dbcp/**/*.xml"/> -->
 		<!-- 自动扫描mapping.xml文件 -->
-<!-- 		<property name="mapperLocations" value="classpath:com/cn/uuu/mapping/*.xml"></property> -->
+		<!-- <property name="mapperLocations" value="classpath:com/cn/uuu/mapping/*.xml"></property> -->
 	</bean>
 
-    <bean id="oneSqlMapExecutorTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="oneSqlMapExecutorTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-<!-- **************************方式一END*********************************** -->
+	<!-- **************************方式一END*********************************** -->
 
-<!-- **************************方式二Start*********************************** -->
- <!-- 创建SqlSessionFactory，同时指定数据源-->  
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">   
-     	<property name="dataSource" ref="dataSource" />   
-     </bean>   
-  
-     <!--创建数据映射器，数据映射器必须为接口-->  
-     <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">   
-     	<property name="mapperInterface" value="com.cn.uuu.dao.UserMapper" />   
-    	 <property name="sqlSessionFactory" ref="sqlSessionFactory" />   
-     </bean>  
-  
-     <bean id="userDaoImpl" class="com.cn.uuu.dao.impl.UserDaoImpl">  
-     	<property name="userMapper" ref="userMapper"/>
-     </bean>
-<!-- **************************方式二END*********************************** -->
+
+	<!-- -->
+	<bean id="viewResolver" class="com.cn.core.view.MultipleViewResolver" p:order="0">
+		<property name="resolvers">
+			<map>
+				<entry key="config">
+					<bean class="com.cn.core.view.GenericFileViewResolver"
+						p:location="/WEB-INF/config/" p:cache="false">
+						<property name="viewName" value="configFileView" />
+					</bean>
+				</entry>
+
+				<entry key="swf">
+					<bean class="com.cn.core.view.GenericFileViewResolver"
+						p:location="/WEB-INF/swf/" p:cache="false">
+						<property name="viewName" value="swfFileView" />
+					</bean>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+
+	<bean id="configFileView" class="com.cn.core.view.GenericFileView"
+		p:contentType="text/plain" p:url="" scope="prototype" />
+
+	<bean id="swfFileView" class="com.cn.core.view.GenericFileView"
+		p:contentType="text/*" p:url="" scope="prototype" />
+
+
 </beans>
