@@ -4,7 +4,7 @@
 <configuration debug="false">
 
 	<property name="APP_NAME" value="pits_${weblogic.Name}" />
-	<property name="LOG_HOME" value="/ebank/log/pits" />
+	<property name="LOG_HOME" value="/ebank/log/mvc" />
 
 	<contextName>${APP_NAME}</contextName>
 
@@ -29,7 +29,7 @@
 	
 	<root>
 		<level value="DEBUG" />
-		<!-- <appender-ref ref="FILE" /> -->
+<!-- 		<appender-ref ref="FILE" /> -->
 		<appender-ref ref="CONSOLE" />
 	</root>
 

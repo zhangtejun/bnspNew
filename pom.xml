@@ -228,6 +228,13 @@
             <version>3.11</version>  
         </dependency> 
 
+<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+<dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.10.2</version>
+</dependency>
+
 	
 	
 <dependency>
