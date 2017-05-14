@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,12 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class SampleController {
 
-	 @RequestMapping("/index")
-	 public ModelAndView getSampleJsp() {
+	 @RequestMapping("/${zhtjun}/index")
+	 public ModelAndView getSampleJsp(String id) {
 		   //1、收集参数、验证参数  
 	       //2、绑定参数到命令对象  
 	       //3、将命令对象传入业务对象进行业务处理  
 	       //4、选择下一个页面  
+		 System.err.println(id);
 	       ModelAndView mv = new ModelAndView();  
 	       //添加模型数据 可以是任意的POJO对象  
 	       mv.addObject("Name", "Hello World!");  

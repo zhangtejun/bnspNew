@@ -5,7 +5,13 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-
+/**
+ * 使用JDK代理模式有一个限制，即它只能为接口创建代理实例，
+ * 这一点我们可以从Proxy.newProxyInstance的方法签名中就可以看的很清楚，
+ * 第二个参数interfaces就是需要代理实例实现的接口列表
+ * @author 10539
+ *
+ */
 public class JDKProxyTest {
 	public static void main(String[] args) throws NoSuchMethodException,
 			SecurityException, InstantiationException, IllegalAccessException,
@@ -30,11 +36,10 @@ public class JDKProxyTest {
 		HelloWorldImpl hli = new HelloWorldImpl(); // 在这里指定被代理类
 		// 通过被代理类对象声明一个代理类对象
 		InvocationHandler mih = new MyInvocationHandler(hli);
-		Class<?> cls = mih.getClass();
 		// 以下是一次性生成代理类实例:
 		// 返回一个指定接口的代理类实例，该接口可以将方法调用指派到指定的调用处理程序。
 		HelloWorld hello = (HelloWorld) Proxy.newProxyInstance(
-				cls.getClassLoader(), // 定义类加载器
+				hli.getClass().getClassLoader(), // 定义类加载器
 				hli.getClass().getInterfaces(), // 实现的接口列表
 				mih); // 指派方法调用的调用处理程序:InvocationHandler对象
 

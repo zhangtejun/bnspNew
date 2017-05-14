@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -64,6 +65,12 @@ public class TestController extends BaseService implements InitializingBean,Appl
 	}
 	public TestController() {
 		// TODO Auto-generated constructor stub
+		
 		System.out.println("****************************TestController");
+	}
+	@Test
+	public void name() {
+		String[] a = new String[]{"123,1,ds"};
+		System.err.println();
 	}
 }

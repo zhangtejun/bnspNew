@@ -10,21 +10,22 @@
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.cn.uuu" />
+	<context:component-scan base-package="com.cn" />
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
 
 	<!--引入属性文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties,file:/zhangtejun/dev/config.properties" />
+	<context:property-placeholder
+		location="classpath:jdbc.properties,file:/zhangtejun/dev/config.properties" />
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	<!-- <bean -->
+	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+	<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+	<!-- <property name="prefix" value="/WEB-INF/zh_CN/jsp/" /> -->
+	<!-- <property name="suffix" value=".jsp" /> -->
+	<!-- </bean> -->
 	<!-- 配置国际化资源文件路径 -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -36,11 +37,23 @@
 
 	<!-- dataSource -->
 
-
-<!-- jndi -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">   
-        <property name="jndiName"><value>java:comp/env/jdbc/EmployeeDB</value></property>   
-    </bean>   
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${jdbc.initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${jdbc.maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${jdbc.minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${jdbc.maxWait}"></property>
+	</bean>
 
 
 	<!-- **************************方式一Start*********************************** -->
@@ -62,33 +75,65 @@
 	<!-- **************************方式一END*********************************** -->
 
 
-	<!-- -->
-	<bean id="viewResolver" class="com.cn.core.view.MultipleViewResolver" p:order="0">
-		<property name="resolvers">
-			<map>
-				<entry key="config">
-					<bean class="com.cn.core.view.GenericFileViewResolver"
-						p:location="/WEB-INF/config/" p:cache="false">
-						<property name="viewName" value="configFileView" />
-					</bean>
-				</entry>
 
-				<entry key="swf">
-					<bean class="com.cn.core.view.GenericFileViewResolver"
-						p:location="/WEB-INF/swf/" p:cache="false">
-						<property name="viewName" value="swfFileView" />
-					</bean>
-				</entry>
 
-			</map>
-		</property>
-	</bean>
-
+	
 	<bean id="configFileView" class="com.cn.core.view.GenericFileView"
 		p:contentType="text/plain" p:url="" scope="prototype" />
 
 	<bean id="swfFileView" class="com.cn.core.view.GenericFileView"
 		p:contentType="text/*" p:url="" scope="prototype" />
+	<bean id="pdfView" class="com.cn.core.view.PdfView"/>
+	
+	<bean id="pdfStamperView" class="com.cn.core.view.BaseAbstractPdfStamperView">
+		<property name="url" value="/WEB-INF/zh_CN/pdf/temp.pdf"/>
+	</bean>
+	<bean id="excelView" class="com.cn.core.view.ExcelView"/>
 
 
+<!-- ****************************************** -->
+<!--1、检查扩展名（如my.pdf）；2、检查Parameter（如my?format=pdf）；3、检查Accept Header-->  
+    <bean id= "contentNegotiationManager" class= "org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+        <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->  
+        <property name= "favorPathExtension" value= "true" />  
+        <!-- 用于开启 /userinfo/123?format=json 的支持 -->  
+        <property name= "favorParameter" value= "true" />  
+        <property name= "parameterName" value= "format"/>  
+        <!-- 是否忽略Accept Header -->  
+        <property name= "ignoreAcceptHeader" value= "false"/>  
+        <property name= "mediaTypes"> <!--扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  -->  
+            <value>  
+                do=*/*  
+                jsonp=application/javascript
+                pdf=application/pdf
+                xls=application/vnd.ms-excel
+            </value>  
+        </property>  
+        <!-- 默认的content type -->  
+        <property name= "defaultContentType" value= "text/html" />  
+    </bean>  
+
+<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+<!-- 内容协商管理器 用于决定media type -->  
+        <property name= "contentNegotiationManager" ref= "contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/zh_CN/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+                 <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+                <bean class="com.cn.core.view.PdfViewResolver"/>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" >
+                    <property name="disableCaching" value="false"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
 </beans>
