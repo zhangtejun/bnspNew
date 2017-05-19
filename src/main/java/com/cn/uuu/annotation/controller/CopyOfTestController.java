@@ -1,6 +1,7 @@
-package com.cn.uuu.controller;
+package com.cn.uuu.annotation.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +30,13 @@ public class CopyOfTestController {
 		com.cn.uuu.user.entity.User user = new User();
 		user.setId(11);
 		user.setUsername("zha");
-		user.setUsername("zha");
+		user.setPassword("zha");
 		User baseUser =	userBaseDao.login(user);
 		System.out.println(baseUser.toString());
 		
-		List list = userBaseDao.allList();
-		System.out.println(list.size());
+		@SuppressWarnings("unchecked")
+		List<Map<String, Object>> list =  userBaseDao.allList();
+		System.out.println(list.get(1).get("username"));
 		
 	}
 }

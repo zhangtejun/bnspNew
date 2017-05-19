@@ -17,22 +17,22 @@
 				        http://www.springframework.org/schema/aop/spring-aop.xsd"
                         >
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.cn" />
+	<context:component-scan base-package="com.cn.uuu.annotation,com.cn.core.policy" >
+	</context:component-scan>
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
 
 	<!--引入属性文件 -->
-	<context:property-placeholder
-		location="classpath:jdbc.properties,file:/zhangtejun/dev/config.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties,file:/zhangtejun/dev/config.properties" />
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
-	<!-- <bean -->
-	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-	<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-	<!-- <property name="prefix" value="/WEB-INF/zh_CN/jsp/" /> -->
-	<!-- <property name="suffix" value=".jsp" /> -->
-	<!-- </bean> -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 	<!-- 配置国际化资源文件路径 -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -44,79 +44,68 @@
 
 	<!-- dataSource -->
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${jdbc.initialSize}"></property>
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${jdbc.maxActive}"></property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${jdbc.minIdle}"></property>
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${jdbc.maxWait}"></property>
-	</bean>
 
+<!-- jndi -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">   
+        <property name="jndiName"><value>java:comp/env/jdbc/EmployeeDB</value></property>   
+    </bean>   
+<!-- jndi end -->
 
-    
-    	<!--======= 事务配置 Begin ================= -->
-	<!-- 事务管理器（由Spring管理MyBatis的事务） -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<!-- 关联数据源 -->
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	<!-- 注解事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<!--======= 事务配置 End =================== -->
+<!-- 
+ Spring MVC处理异常有3种方式： 
+ （1）使用Spring MVC提供的简单异常处理器SimpleMappingExceptionResolver；
+ （2）实现Spring的异常处理接口HandlerExceptionResolver 自定义自己的异常处理器；
+（3）使用@ExceptionHandler注解实现异常处理
+ -->
+
 
     <mvc:default-servlet-handler/>
     <mvc:resources location="/resources/" mapping="/resources/**"/>
-<!--     <mvc:interceptors> -->
+    <mvc:interceptors>
 <!--         配置全局拦截器 -->
-<!--         <mvc:interceptor> -->
-<!--         	<mvc:mapping path="/**"/> -->
-<!--         	<bean class="com.cn.core.interceptor.UserLoginInterceptor"/> -->
-<!--         </mvc:interceptor> -->
+        <mvc:interceptor>
+        	<mvc:mapping path="/**"/>
+        	<bean class="com.cn.core.interceptor.RequestParamCheckInterceptor"/>
+<!--         	<ref bean="requestParamCheckInterceptor"/> -->
+        </mvc:interceptor>
         
-<!--         <mvc:interceptor> -->
-<!--         	<mvc:mapping path="/**"/> -->
-<!--         	<bean class="com.cn.core.interceptor.UserLoginInterceptor"/> -->
-<!--         </mvc:interceptor> -->
-<!--     </mvc:interceptors> -->
-
+        <mvc:interceptor>
+        	<mvc:mapping path="/**"/>
+        	<bean class="com.cn.core.interceptor.UserLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 	<!-- **************************方式一Start*********************************** -->
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效 -->
-		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:spring-mybatis.xml" />
 		<!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可， 
 			当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 -->
 		<!-- <property name="mapperLocations" value="classpath*:com/xxt/ibatis/dbcp/**/*.xml"/> -->
-		<!-- 自动扫描mapping.xml文件 -->
-		<!-- <property name="mapperLocations" value="classpath:com/cn/uuu/mapping/*.xml"></property> -->
-<!-- 批量别名定义？？？？？ mybatis自动扫描包中的po类，自动定义别名，别名是类名(首字母大写或小写都可以,一般用小写)
-  例如：cn.itcast.mybatis.po.User起别名为User或者user;-->
-<!-- 		<property name="typeAliasesPackage" value="com.xx.core.entity, -->
-<!--                                                 com.xx.modules.cms.entity, -->
-<!--                                                 com.xx.modules.weibo.entity"/> -->
+<!-- 		自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:com/cn/uuu/mapping/*.xml"></property>
+		<property name="typeAliasesPackage">
+			<value>
+			com.cn.uuu.user.entity
+			</value>
+		</property>
 	</bean>
 
-	<bean id="oneSqlMapExecutorTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cn.uuu.**.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    
+    <!-- 定义事务管理器 对mybatis操作数据库的控制，spring使用jdbc的事务控制-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- **************************方式一END*********************************** -->
 
 
-
-
-	
 	<bean id="configFileView" class="com.cn.core.view.GenericFileView"
 		p:contentType="text/plain" p:url="" scope="prototype" />
 
@@ -176,17 +165,16 @@
         </property>
     </bean>
     
-        <bean id="exceptionHandler" class="com.cn.uuu.core.exception.MainExceptionHandler"/>
+    <bean id="exceptionHandler" class="com.cn.uuu.core.exception.MainExceptionHandler"/>
     
-    <bean id="requestParamCheckInterceptor" class="com.cn.core.interceptor.RequestParamCheckInterceptor">
-    	<property name="policyList">
-    		<list>
-    			<!--  -->
+<!--     <bean id="requestParamCheckInterceptor" class="com.cn.core.interceptor.RequestParamCheckInterceptor"> -->
+<!--     	<property name="policyList"> -->
+<!--     		<list> -->
+<!--     			 -->
     			<bean class="com.cn.core.policy.RequestParamCheckPolicy">
-    				<property name="messageKey"><value>error.request.entry</value></property>
+    				<property name="messageKey"><value>error.request.param</value></property>
 				    <property name="denyPattern">
 				        <map>
-				            <entry key="an entry" value="just some string"/>
 				            <entry key="js1"><value><![CDATA[<script]]></value></entry>
 							<entry key="js2"><value>javascript</value></entry>
 							<entry key="js3"><value><![CDATA[<img]]></value></entry>
@@ -212,9 +200,9 @@
 							<entry key="js23"><value><![CDATA[\.\.\/]]></value></entry>
 				        </map>
 				    </property>
-				    
     			</bean>
-    		</list>
-    	</property>
-    </bean>
+<!--     		</list> -->
+<!--     	</property> -->
+<!--     </bean> -->
+    
 </beans>

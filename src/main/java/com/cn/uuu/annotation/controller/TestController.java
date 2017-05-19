@@ -1,4 +1,4 @@
-package com.cn.uuu.controller;
+package com.cn.uuu.annotation.controller;
 
 import java.util.HashMap;
 import java.util.Locale;

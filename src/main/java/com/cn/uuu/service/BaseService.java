@@ -17,13 +17,13 @@ public class BaseService {
 	/**
 	 * 提供userService
 	 */
-	@Resource(name="userServiceImpl")
+//	@Resource(name="userServiceImpl")
 	public UserService userService;
 	
 	/**
 	 * 提供sqlSession
 	 */
-	@Resource(name="oneSqlMapExecutorTemplate")
+//	@Resource(name="oneSqlMapExecutorTemplate")
 	public SqlSessionTemplate sqlSessionTemplate;
 	
 	/**

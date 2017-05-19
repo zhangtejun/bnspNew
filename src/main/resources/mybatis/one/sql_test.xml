@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!-- 
+	在mybatis中，映射文件中的namespace是用于绑定Dao接口的，即面向接口编程。
+	当你的namespace绑定接口后，你可以不用写接口实现类，mybatis会通过该绑定自动
+	帮你找到对应要执行的SQL语句.   namespace=com.cn.uuu.dao
+ -->
 <mapper namespace="mybatis">
 	<resultMap id="CashFlowKindMap" type="HashMap">
 		<result property="CatalogNo" column="id" />
@@ -8,4 +13,11 @@
 <select id="aa" parameterType="java.lang.String" resultMap="CashFlowKindMap">
 	select id,menu_url from shopping_vmenu
 </select>
+
+<insert id="in" parameterType="HashMap">
+	insert into tutorials_tbl (tutorial_title,tutorial_author,submission_date) values(#{title},#{author},now())
+</insert>
+<insert id="inOther" parameterType="HashMap">
+	insert into tutorials_tbl1 (name,tutorial_author,submission_date) values(#{name},#{author},now())
+</insert>
 </mapper>

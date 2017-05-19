@@ -34,7 +34,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>  <!-- 自定义spring配置文件名 -->
+            <param-value>classpath:myConfig.properties</param-value>  <!-- 自定义spring配置文件名 -->
         </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
@@ -75,4 +75,16 @@
 <!--         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> -->
 <!--     </listener> -->
 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/error.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.html</location>
+	</error-page>
 </web-app>

@@ -1,13 +1,11 @@
-package com.cn.uuu.controller;
+package com.cn.uuu.annotation.controller;
 
-import java.rmi.server.ObjID;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -156,36 +154,4 @@ public class SampleController {
 //		 model.addAttribute("fileName", "test.pdf");
 	     return "excelView"; 
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 @Test
-	 public void name() {
-		 Map<String,Object> map=new HashMap<String,Object>();
-		 map.put("Name", "二欢");
-	}
-	 
-	 
-	 
-	 
-	 
-	 
 }
