@@ -70,8 +70,15 @@
         </mvc:interceptor>
         
         <mvc:interceptor>
-        	<mvc:mapping path="/**"/>
+        	<mvc:mapping path="/home/*"/>
         	<bean class="com.cn.core.interceptor.UserLoginInterceptor"/>
+        </mvc:interceptor>
+        
+        <!-- 页面token -->
+        <mvc:interceptor>
+        <!-- 由于注解自动注入 token 策略（RequestParamCheckInterceptor）     该拦截器无用TokenInterceptor-->
+        	<mvc:mapping path="/xxx/**"/>
+        	<bean class="com.cn.core.interceptor.TokenInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 	<!-- **************************方式一Start*********************************** -->
@@ -204,5 +211,19 @@
 <!--     		</list> -->
 <!--     	</property> -->
 <!--     </bean> -->
-    
+  
+  <!-- 页面令牌 -->
+    <bean id="tokenManager" class="com.cn.core.token.SimpleTokenManager">
+    	<property name="tokenName" value="_SysTokenName"/>
+    	<property name="tokenListName" value="_SysTokenList"/>
+    	<property name="delayTime" value="900"/>
+    	<property name="maxEntryNumber" value="1"/>
+    	<property name="tokenLength" value="6"/>
+    </bean>
+    <!-- 防止页面请求伪造策略 -->
+    <bean id="tokenControlPolicy" class="com.cn.core.policy.TokenControlPolicy">
+    	<property name="tokenManager" ref="tokenManager"/>
+    	<property name="messageKey" value="validation.resubmit_same_token"/>
+    	<property name="timeoutMessageKey" value="validation.token_timeout"/>
+    </bean>
 </beans>

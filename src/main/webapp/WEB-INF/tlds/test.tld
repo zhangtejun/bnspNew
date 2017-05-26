@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>1.0</tlib-version>
+
+	<jsp-version>1.2</jsp-version>
+
+	<short-name>Test</short-name>
+
+	<description>  JSP Tag Library.</description>
+
+<!--  非常重要	后续添加自定义标签，请考虑跨站脚本攻击问题，所有输出内容如果为页面输入数据，请使用TagUtil.escapeXml(beginNumberName),将String类型的数字包裹输出 -->
+	<!-- 描述：防止重复提交 和 请求伪造，生成随机数，并保存
+	用法：<t:token tokenName="_SysTokenName" pageIdName="aaa"/> -->
+	<tag>
+		<name>token</name>
+		<tag-class>com.csii.pe.channel.http.tag.ext.ExtendedTokenTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>tokenName</name>
+		</attribute>
+		<attribute>
+			<name>pageIdName</name>
+		</attribute>
+		<attribute>
+			<name>tokenListName</name>
+		</attribute>
+		<attribute>
+			<name>maxEntryNumber</name>
+		</attribute>
+		<attribute>
+			<name>delayTime</name>
+		</attribute>
+		<attribute>
+			<name>numeric</name>
+		</attribute>
+		<attribute>
+			<name>tokenManager</name>
+		</attribute>
+	</tag>
+	
+</taglib>

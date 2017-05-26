@@ -1,0 +1,74 @@
+a{
+	cursor: pointer;
+}
+.login-bg{
+	position: relative;
+    height: 100%;
+    background-image: url(../images/back2.jpg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    padding: 0 12px;
+    padding-top: 15px;
+}
+/* .login-bg:before { */
+/* 	left: 0;  */
+/*     top: 0; */
+/*     width: 100%; */
+/*     content: ""; */
+/*     display: inline-block; */
+/*     background-color: rgba(84,108,112,.75); */
+/*     position: absolute; */
+/*     height: 100%; */
+/* } */
+.dialog {
+    max-width: 500px;
+    margin: 8rem auto 0 auto;
+}
+.card-header {
+    padding: 0.25rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #32A7B8;
+    border-bottom: 1px solid #32A7B8;
+        color: white;
+}
+.form-check {
+    position: relative;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #32A7B8;
+    border-radius: 0.25rem;
+}
+.card-block {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+.btn-primary,.btn-primary:focus {
+    color: #fff;
+    background-color: #32A7B8;
+    border-color: #0493a7 !important;
+        background-image: none;
+}
+.float-right {
+    float: right !important;
+}
+.text-warning {
+    color: #f0ad4e !important;
+}

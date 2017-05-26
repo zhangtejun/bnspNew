@@ -1,11 +1,11 @@
 package com.cn.uuu.service;
 
-import javax.annotation.Resource;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.cn.core.token.SimpleTokenManager;
 
 
 /**
@@ -14,6 +14,11 @@ import org.springframework.web.context.WebApplicationContext;
  *
  */
 public class BaseService {
+	/**
+	 * 获取token
+	 */
+	@Autowired
+	protected SimpleTokenManager tokenManager;
 	/**
 	 * 提供userService
 	 */
