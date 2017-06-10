@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.cn.uuu.service.BaseService;
+import com.cn.uuu.user.entity.User;
 /**
  * mybatis非注解的sql映射文件配置
  * @author 10539
@@ -90,5 +92,19 @@ public class TestController extends BaseService implements InitializingBean,Appl
 	public void name() {
 		String[] a = new String[]{"123,1,ds"};
 		System.err.println();
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("1", new String("213"));
+		map.put("2", new User());
+		
+		
+		
+		
+	}
+	private <T> Map<String,T> load(){
+		Map<String, T> map = new HashMap<>();
+//		map.put("1", "");
+//		map.put("2", new User());
+		return map;
 	}
 }

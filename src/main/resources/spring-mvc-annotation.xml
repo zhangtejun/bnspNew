@@ -172,7 +172,13 @@
         </property>
     </bean>
     
-    <bean id="exceptionHandler" class="com.cn.uuu.core.exception.MainExceptionHandler"/>
+    <bean id="exceptionHandler" class="com.cn.uuu.core.exception.MainExceptionHandler">
+    	<property name="ignorePrintStackList">
+    		<list>
+    			<value>invalid_user</value><!-- 不打印堆栈的错误码列表 -->
+    		</list>
+    	</property>
+    </bean>
     
 <!--     <bean id="requestParamCheckInterceptor" class="com.cn.core.interceptor.RequestParamCheckInterceptor"> -->
 <!--     	<property name="policyList"> -->

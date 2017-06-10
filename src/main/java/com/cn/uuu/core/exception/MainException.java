@@ -39,6 +39,11 @@ public class MainException extends NestedCheckedException implements Messageable
 		super(messageKey);
 		messageSupport = new MessageSupport();
 		messageSupport.setArgs(objects);
+		if(messageKey == null || messageKey.trim().length()==0){
+			messageSupport.setMessageKey(DEFAULT);
+		}else{
+			messageSupport.setMessageKey(messageKey);
+		}
 	}
 
 	@Override

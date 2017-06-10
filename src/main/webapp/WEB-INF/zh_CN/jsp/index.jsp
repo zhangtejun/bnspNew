@@ -8,6 +8,11 @@
 <%@ include file="/WEB-INF/zh_CN/common/head.jsp"%>
 </head>
 <body>
+<form action="pdfs.do" method="post" name="form1" id="form1">
+<div id="errorMsg" class="errBox"><t:error/></div>
+<t:token tokenName="_SysTokenName"/>
+<input type="submit" value="测试"/>
+</form>
 <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">

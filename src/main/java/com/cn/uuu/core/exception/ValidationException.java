@@ -16,5 +16,9 @@ public class ValidationException extends MainException implements ValidationMess
     {
         super(s, throwable);
     }
-
+    
+    public ValidationException(String s, Object[] obj)
+    {
+        super(s, obj);
+    }
 }

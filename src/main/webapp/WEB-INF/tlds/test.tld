@@ -16,7 +16,7 @@
 	用法：<t:token tokenName="_SysTokenName" pageIdName="aaa"/> -->
 	<tag>
 		<name>token</name>
-		<tag-class>com.csii.pe.channel.http.tag.ext.ExtendedTokenTag</tag-class>
+		<tag-class>com.cn.core.tag.ExtendedTokenTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>tokenName</name>
@@ -38,6 +38,24 @@
 		</attribute>
 		<attribute>
 			<name>tokenManager</name>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>error</name>
+		<tag-class>com.cn.core.tag.ErrorTag</tag-class>
+		<body-content>empty</body-content>
+		
+		<attribute>
+			<name>condition</name>
+		</attribute>
+		<attribute>
+			<name>errorName</name>
+		</attribute>
+		<attribute>
+			<name>escapeXml_</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
 		</attribute>
 	</tag>
 	

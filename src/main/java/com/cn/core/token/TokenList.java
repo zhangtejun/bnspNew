@@ -11,7 +11,7 @@ public class TokenList implements Serializable {
 	private int tokenLength;
 	private boolean Tokdo;
 	private LinkedList linkedList;
-	private static Random a = new SecureRandom();
+	private static Random random = new SecureRandom();
 
 	public TokenList(int maxEntryNumber, int delayTime, int tokenLength) {
 		this(maxEntryNumber, delayTime, tokenLength, false);
@@ -33,7 +33,7 @@ public class TokenList implements Serializable {
 	}
 
 	public String getNextTokenId() {
-		long maxEntryNumber = a.nextLong();
+		long maxEntryNumber = random.nextLong();
 		long tokenLength = maxEntryNumber >= 0L ? maxEntryNumber
 				: -maxEntryNumber;
 		StringBuffer sb = new StringBuffer(

@@ -14,7 +14,7 @@ public class RequestParamCheckInterceptor extends MyInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		System.err.println("test pre---->");
+		System.err.println("RequestParamCheckInterceptor  start ---->");
 		
 		return execute(request);
 	}
@@ -24,7 +24,7 @@ public class RequestParamCheckInterceptor extends MyInterceptor{
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		System.err.println("test post");
+		System.err.println("test postHandle");
 		
 	}
 
@@ -33,7 +33,7 @@ public class RequestParamCheckInterceptor extends MyInterceptor{
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.err.println("test post");
+		System.err.println("test afterCompletion");
 	}
 	
 }

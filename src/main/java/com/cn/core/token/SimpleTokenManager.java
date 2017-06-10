@@ -92,6 +92,7 @@ public class SimpleTokenManager implements TokenManager {
         TokenList tokenList = (TokenList) request.getSession().getAttribute(tokenListNameF);
         
         if(tokenList == null){
+        	//实例化TokenList
         	tokenList = new TokenList(maxEntryNumber, delayTime, tokenLength);
         	request.getSession().setAttribute(tokenListNameF, tokenList);
         }
@@ -119,7 +120,9 @@ public class SimpleTokenManager implements TokenManager {
         log.info((new StringBuilder()).append("@@@@@@@:").append("#######").append(",pageToken is :").append((String) request.getSession().getAttribute(tokenName))
                 .append(",TokenList is:").append(tokenlist).toString());
         if (tokenlist == null) return 0;
-        String s = (String) request.getSession().getAttribute(tokenName);
+//        String s = (String) request.getSession().getAttribute(tokenName);
+        String s = (String)request.getParameter(tokenName);
+        
         if (s == null) return 0;
         if (ignoreCase) s = s.toLowerCase();
         try {
